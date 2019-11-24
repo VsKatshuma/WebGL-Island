@@ -46,13 +46,6 @@ function main() {
     var cameraAngleRadians = degToRad(0);
     var fieldOfViewRadians = degToRad(60);
 
-    // Setup a ui.
-    webglLessonsUI.setupSlider("#cameraAngle", {value: radToDeg(fieldOfViewRadians), slide: updateFieldOfView, min: 1, max: 120});
-    function updateFieldOfView(event, ui) {
-        fieldOfViewRadians = degToRad(ui.value);
-        drawScene();
-    }
-
     window.addEventListener("wheel", event => {
         const delta = Math.sign(event.deltaY) * 3;
         fieldOfViewRadians += degToRad(delta);
@@ -67,11 +60,8 @@ function main() {
 
 gl.enable(gl.BLEND);
 //gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-//gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA); // This is the correct blending function with straight-alpha input colors and transparent output colors
-
-//Or, you can blend premultiplied colors, and it all gets easier:
-//gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+//gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); // Or, you can blend premultiplied colors, and it gets easier
 
     gl.clearColor(0.1, 0, 0.7, 1);
 
@@ -343,30 +333,18 @@ var m4 = {
         var m31 = m[3 * 4 + 1];
         var m32 = m[3 * 4 + 2];
         var m33 = m[3 * 4 + 3];
-        var tmp_0  = m22 * m33;
-        var tmp_1  = m32 * m23;
-        var tmp_2  = m12 * m33;
-        var tmp_3  = m32 * m13;
-        var tmp_4  = m12 * m23;
-        var tmp_5  = m22 * m13;
-        var tmp_6  = m02 * m33;
-        var tmp_7  = m32 * m03;
-        var tmp_8  = m02 * m23;
-        var tmp_9  = m22 * m03;
-        var tmp_10 = m02 * m13;
-        var tmp_11 = m12 * m03;
-        var tmp_12 = m20 * m31;
-        var tmp_13 = m30 * m21;
-        var tmp_14 = m10 * m31;
-        var tmp_15 = m30 * m11;
-        var tmp_16 = m10 * m21;
-        var tmp_17 = m20 * m11;
-        var tmp_18 = m00 * m31;
-        var tmp_19 = m30 * m01;
-        var tmp_20 = m00 * m21;
-        var tmp_21 = m20 * m01;
-        var tmp_22 = m00 * m11;
-        var tmp_23 = m10 * m01;
+        var tmp_0  = m22 * m33; var tmp_1  = m32 * m23;
+        var tmp_2  = m12 * m33; var tmp_3  = m32 * m13;
+        var tmp_4  = m12 * m23; var tmp_5  = m22 * m13;
+        var tmp_6  = m02 * m33; var tmp_7  = m32 * m03;
+        var tmp_8  = m02 * m23; var tmp_9  = m22 * m03;
+        var tmp_10 = m02 * m13; var tmp_11 = m12 * m03;
+        var tmp_12 = m20 * m31; var tmp_13 = m30 * m21;
+        var tmp_14 = m10 * m31; var tmp_15 = m30 * m11;
+        var tmp_16 = m10 * m21; var tmp_17 = m20 * m11;
+        var tmp_18 = m00 * m31; var tmp_19 = m30 * m01;
+        var tmp_20 = m00 * m21; var tmp_21 = m20 * m01;
+        var tmp_22 = m00 * m11; var tmp_23 = m10 * m01;
 
         var t0 = (tmp_0 * m11 + tmp_3 * m21 + tmp_4 * m31) -
             (tmp_1 * m11 + tmp_2 * m21 + tmp_5 * m31);
